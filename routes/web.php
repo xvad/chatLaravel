@@ -12,15 +12,28 @@
 */
 
 Route::get('/', function () {
-    if(isset($_GET['msg'])){
+
+    // retorno
+
+    $mensajes = App\Mensaje::all();
+
+
+    // se lo doy a la vista
+
+    return view('welcome', ['mensajes' => $mensajes]);
+});
+
+//Agrego los mensajes a la base de datos
+Route::post('mensaje',function (){
+
+    if($_POST['msgText'] != null and $_POST['user'] != null) {
         $msg = new \App\Mensaje();
-        $msg->usuario = $_GET['user'];
-        $msg->texto = $_GET['msg'];
+        $msg->texto = $_POST['msgText'];
+        $msg->usuario = $_POST['user'];
         $msg->fecha = \Carbon\Carbon::now();
         $msg->save();
+
     }
-
-
     // retorno
 
     $mensajes = App\Mensaje::all();
@@ -30,27 +43,3 @@ Route::get('/', function () {
 
     return view('welcome', ['mensajes' => $mensajes]);
 });
-
-//Obtengo los mensajes de la base de datos
-Route::get('/mensaje',function (){
-
-        if(isset($_GET['msg'])){
-                $msg = new \App\Mensaje();
-                $msg->usuario = $_GET['user'];
-                $msg->texto = $_GET['msg'];
-                $msg->fecha = \Carbon\Carbon::now();
-                $msg->save();
-        }
-
-
-    // retorno
-
-    $mensajes = App\Mensaje::all();
-
-
-    // se lo doy a la vista
-
-    return view('welcome', ['mensajes' => $mensajes]);
-});
-
-

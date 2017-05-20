@@ -190,13 +190,25 @@
         <output id="list">
         </output>
 
-        <p>Ingresa nombre de usuario</p> <input type="text" id ="idNick"/>  <button type="button" id="idButtonModal">Ingresar</button>
+        <p>Ingresa nombre de usuario</p> <input type="text" id ="idNick" name="idNick"/>  <input type="submit" class="button" id="idButtonModal" value="Send"/>
 
     </div>
 
 </div>
 
+<center>
+    <div id="form">
+        <form class="form" method="post" action ="/mensaje">
+            {!! csrf_field() !!}
+            <input id="msgText" style="width:393px" type="text" name="msgText"/>
+            <button type="submit">Submit</button>
 
+            <br>
+
+            <input id="user" style="visibility:hidden" type="text" name="user"/>
+        </form>
+    </div>
+</center>
 </body>
 </html>
 
@@ -210,6 +222,7 @@
         var modal = document.getElementById('myModal');
         var user = getCookie("username");
         if (user != "") {
+            document.getElementById("user").value = user;
         } else {
             modal.style.display = "block";
         }
@@ -226,6 +239,7 @@
              }else{*/
             setCookie("username", user, 7);
             modal.style.display = "none";
+            document.getElementById("user").value = user;
             //}
         }else{
             alert("Debe ingresar un usuario")
