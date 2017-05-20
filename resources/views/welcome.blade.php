@@ -167,8 +167,10 @@
                         $texto = $mensaje->texto;
                         $user = $mensaje->usuario;
                         $fecha = $mensaje->fecha;
+                        $fechaEx = explode(" ", $fecha);
+                        $hora = $fechaEx[1];
                     @endphp
-                    <div class="bubble-container"><span class="bubble"><img class="bubble-avatar" src="" /><div class="bubble-text"><p>( {{ $fecha }} ) - {{ $user  }} : {{ $texto  }}</p></div><span class="bubble-quote" /></span></div>
+                <div class="bubble-container"><span class="bubble"><img class="bubble-avatar" src="" /><div class="bubble-text"><p><font color="gray">( {{ $hora }} ) </font> -  <font color="blue">{{ $user  }}</font>: {{ $texto  }}</p></div><span class="bubble-quote" /></span></div>
                 @endforeach
 
         </div>
